@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML5 Audio, Video, iFrame, and Image Map</title>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>HTML5 Audio, Video, iFrame, and Image Map</h1>
+    </header>
+
+    <!-- Main content -->
+    <main>
+        <!-- Audio Section -->
+        <section id="audio">
+            <h2>Audio Example</h2>
+            <p>Listen to a sample audio file:</p>
+            <audio controls>
+                <source src="audio-sample.mp3" type="audio/mp3">
+                Your browser does not support the audio element.
+            </audio>
+        </section>
+
+        <!-- Video Section -->
+        <section id="video">
+            <h2>Video Example</h2>
+            <p>Watch a sample video:</p>
+            <video width="400" controls>
+                <source src="video-sample.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </section>
+
+        <!-- iFrame Section -->
+        <section id="iframe">
+            <h2>iFrame Example</h2>
+            <p>Below is an embedded YouTube video:</p>
+            <iframe width="400" height="250" 
+                    src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                    title="YouTube video player" 
+                    frameborder="0" allowfullscreen>
+            </iframe>
+        </section>
+
+        <!-- Second iFrame Section -->
+        <iframe src="https://www.example.com" 
+                name="myIframe" width="600" height="400" 
+                title="Example Website"></iframe>
+        <a href="https://www.programiz.pro" target="myIframe">Load Programiz in Iframe</a>
+        
+        <iframe width="560" height="315" 
+                src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=H__4peCWhCW20NXI" 
+                title="YouTube video player" 
+                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+        </iframe>
+
+        <!-- Image Map Section -->
+        <section id="image-map">
+            <h2>Image Map Example</h2>
+            <p>Click on the shapes below:</p>
+            <img src="https://via.placeholder.com/600x400" 
+                 alt="Image Map Example" usemap="#shapes-map">
+            <map name="shapes-map">
+                <area shape="rect" coords="34,44,270,350" 
+                      href="rectangle.html" alt="Rectangle Area">
+                <area shape="circle" coords="350,150,50" 
+                      href="circle.html" alt="Circle Area">
+                <area shape="poly" coords="400,100,450,150,400,200" 
+                      href="polygon.html" alt="Polygon Area">
+            </map>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 HTML5 Media Elements Showcase. All rights reserved.</p>
+    </footer>
+
+    <!-- Internal CSS -->
+    <style>
+        /* General Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Main Section Styles */
+        main {
+            background-color: white;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+
+        /* Section Styles */
+        section {
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
+
+        /* Media Styles */
+        audio, video, iframe, img {
+            display: block;
+            margin: 20px auto;
+            max-width: 100%;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            margin-top: 20px;
+        }
+    </style>
+
+</body>
+</html>

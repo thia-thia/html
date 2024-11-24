@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="bookingApp">
+<head>
+    <title>AngularJS Booking Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #333;
+            color: white;
+        }
+        section {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            margin-top: 10px;
+            display: block;
+            color: #333;
+        }
+        select, input[type="text"], input[type="email"], input[type="number"], input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .radio-group {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 15px;
+        }
+        .radio-group label {
+            display: flex;
+            align-items: center;
+        }
+        .radio-group input {
+            margin-right: 10px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            background-color: #28a745;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Booking System</h1>
+</header>
+
+<section ng-controller="BookingController">
+    <article>
+        <h2>User Details and Booking Form</h2>
+        <form name="bookingForm" ng-submit="submitForm()">
+            <!-- User Details -->
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" ng-model="user.name" placeholder="Enter your full name" required>
+
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" ng-model="user.age" placeholder="Enter your age" required>
+            <span ng-show="user.age < 18" style="color:red;">You must be at least 18 years old to book.</span>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" ng-model="user.email" placeholder="Enter your email (gmail.com only)" required>
+            <span ng-show="!isValidGmail(user.email)" style="color:red;">Please enter a valid Gmail address.</span>
+
+            <label for="date">Booking Date:</label>
+            <input type="date" id="date" name="date" ng-model="user.date" required>
+
+            <label for="tickets">Number of Tickets:</label>
+            <input type="number" id="tickets" name="tickets" ng-model="user.tickets" min="1" max="10" placeholder="1-10" required>
+
+            <!-- Booking Options -->
+            <label for="event">Select Event:</label>
+            <select id="event" name="event" ng-model="user.event" required>
+                <option value="">--Choose Event--</option>
+                <option ng-repeat="event in events" value="{{event}}">{{event | capitalize}}</option>
+            </select>
+
+            <!-- Payment Options -->
+            <label>Payment Method:</label>
+            <div class="radio-group">
+                <label>
+                    <input type="radio" name="payment" ng-model="user.payment" value="credit" required> Credit Card
+                </label>
+                <label>
+                    <input type="radio" name="payment" ng-model="user.payment" value="debit" required> Debit Card
+                </label>
+                <label>
+                    <input type="radio" name="payment" ng-model="user.payment" value="paypal" required> PayPal
+                </label>
+            </div>
+
+            <button type="submit" ng-disabled="bookingForm.$invalid">Book Now</button>
+        </form>
+    </article>
+</section>
+
+<footer>
+    <p>&copy; 2024 Booking System</p>
+</footer>
+
+<!-- AngularJS and Application Scripts -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+<script>
+    // Define the AngularJS module
+    var app = angular.module('bookingApp', []);
+
+    // Define a factory to simulate fetching event data from a service
+    app.factory('EventService', function() {
+        var events = ['Concert', 'Theater', 'Sports'];
+        return {
+            getEvents: function() {
+                return events;
+            }
+        };
+    });
+
+    // Define a custom filter for capitalizing the first letter of events
+    app.filter('capitalize', function() {
+        return function(input) {
+            if (input) {
+                return input.charAt(0).toUpperCase() + input.slice(1).toLowerCase();
+            }
+        };
+    });
+
+    // Define the Booking Controller and inject dependencies
+    app.controller('BookingController', ['$scope', 'EventService', function($scope, EventService) {
+        // Fetch events using the service
+        $scope.events = EventService.getEvents();
+
+        // Validate Gmail address format
+        $scope.isValidGmail = function(email) {
+            var gmailPattern = /^[a-zA-Z0-9._-]+@gmail\.com$/;
+            return gmailPattern.test(email);
+        };
+
+        // Form submission function
+        $scope.submitForm = function() {
+            if ($scope.user.age >= 18 && $scope.isValidGmail($scope.user.email)) {
+                alert("Booking successfully completed! Thank you, " + $scope.user.name + ".");
+                $scope.user = {}; // Reset form data after submission
+            } else {
+                alert("Please correct the form.");
+            }
+        };
+    }]);
+</script>
+
+</body>
+</html>
