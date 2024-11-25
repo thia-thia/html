@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AngularJS Filters with User Input</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="myController">
+
+  <h1>AngularJS Filters</h1>
+
+  <!-- Currency Filter -->
+  <label for="currencyInput">Enter Amount:</label>
+  <input type="number" id="currencyInput" ng-model="amount" placeholder="Enter a number" />
+  <p><strong>Currency Format:</strong> {{ amount | currency }}</p>
+
+  <!-- Date Filter -->
+  <label for="dateInput">Enter Date:</label>
+  <input type="date" id="dateInput" ng-model="userDate" />
+  <p><strong>Formatted Date:</strong> {{ userDate | date:'fullDate' }}</p>
+
+  <!-- Lowercase Filter -->
+  <label for="lowercaseInput">Enter Text:</label>
+  <input type="text" id="lowercaseInput" ng-model="userText" placeholder="Enter text" />
+  <p><strong>Lowercase:</strong> {{ userText | lowercase }}</p>
+
+  <!-- Number Filter -->
+  <label for="numberInput">Enter Number:</label>
+  <input type="number" id="numberInput" ng-model="userNumber" placeholder="Enter a number" />
+  <p><strong>Formatted Number:</strong> {{ userNumber | number:2 }}</p>
+
+  <!-- Uppercase Filter -->
+  <label for="uppercaseInput">Enter Text:</label>
+  <input type="text" id="uppercaseInput" ng-model="userText" placeholder="Enter text" />
+  <p><strong>Uppercase:</strong> {{ userText | uppercase }}</p>
+
+  <script>
+    // AngularJS Application
+    var app = angular.module('myApp', []);
+
+    // Controller
+    app.controller('myController', function($scope) {
+      $scope.amount = 0;
+      $scope.userDate = new Date();
+      $scope.userText = '';
+      $scope.userNumber = 0;
+    });
+  </script>
+</body>
+</html>
